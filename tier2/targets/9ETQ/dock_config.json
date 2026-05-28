@@ -1,0 +1,19 @@
+{
+  "_comment": "PARP1_CAT_AZD5305_9ETQ: receptor+box from 9ETQ.cif chain A, native ligand A1H63. Validated by native redock.",
+  "target": "PARP1_CAT_AZD5305_9ETQ",
+  "receptor_pdbqt": "receptor.pdbqt",
+  "box": {
+    "center_x": 8.583766666666667,
+    "center_y": 42.02006666666668,
+    "center_z": 8.141566666666666,
+    "size_x": 33.124,
+    "size_y": 22.5,
+    "size_z": 25.591
+  },
+  "vina": {
+    "exhaustiveness": 8,
+    "num_modes": 9,
+    "cpu": 16,
+    "seed": 42
+  }
+}

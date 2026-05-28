@@ -1,0 +1,44 @@
+# PancScan Tier 0 conda environment
+# Install with: mamba env create -f environment.yml
+# Then: mamba activate pancscan
+#
+# Targeted at macOS arm64 (Apple Silicon) but should work on Linux x86_64 too.
+# No CUDA dependency — Tier 0 runs CPU-only on Vina.
+#
+# Vina: the conda-forge package is named `vina` (NOT `autodock-vina`, which has
+# no osx-arm64 build — and there is no Homebrew formula either). `vina` 1.2.x on
+# conda-forge ships both the Python bindings and the `vina` CLI for Apple Silicon.
+# `smina` is included as a drop-in, Vina-compatible fallback docking engine.
+
+name: pancscan
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  # Python
+  - python=3.11
+
+  # Cheminformatics
+  - openbabel              # for PDBQT conversion (fallback if Meeko CLI fails)
+  - rdkit                  # SMILES <-> 3D, molecule manipulation
+  - biopython              # parsing PDB files, splitting chains
+  - mdanalysis             # backup for trajectory handling (not used in Tier 0 but useful later)
+
+  # Docking engine (conda-forge, osx-arm64 native)
+  - vina                   # AutoDock Vina 1.2.x — provides the `vina` CLI + Python bindings
+  - smina                  # drop-in, Vina-compatible fallback engine
+
+  # Numerics
+  - numpy
+  - pandas
+  - scipy
+
+  # Optional viz (lightweight; can skip if it fails on osx-arm64)
+  - py3dmol                # in-notebook 3D rendering; no native deps
+
+  # pip-only packages
+  - pip
+  - pip:
+      - meeko>=0.6         # Forli lab's prep tool (preferred over obabel for receptor PDBQT)
+      - spyrmsd            # symmetry-corrected RMSD between docked + crystal poses

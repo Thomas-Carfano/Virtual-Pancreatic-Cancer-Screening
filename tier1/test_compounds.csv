@@ -1,0 +1,5 @@
+id,smiles,label
+MRTX1133,C#Cc1c(F)ccc2cc(O)cc(-c3ncc4c(N5C[C@H]6CC[C@@H](C5)N6)nc(OC[C@@]56CCCN5C[C@H](F)C6)nc4c3F)c12,active
+propranolol,CC(C)NCC(O)COc1cccc2ccccc12,decoy
+aspirin,CC(=O)Oc1ccccc1C(=O)O,decoy
+caffeine,Cn1cnc2c1c(=O)n(C)c(=O)n2C,decoy

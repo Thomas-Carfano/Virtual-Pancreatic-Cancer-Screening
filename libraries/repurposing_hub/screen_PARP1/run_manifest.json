@@ -1,0 +1,45 @@
+{
+  "date": "2026-05-27T06:39:40.773208",
+  "config": {
+    "_comment": "PARP1_CAT_AZD5305_9ETQ: receptor+box from 9ETQ.cif chain A, native ligand A1H63. Validated by native redock.",
+    "target": "PARP1_CAT_AZD5305_9ETQ",
+    "receptor_pdbqt": "receptor.pdbqt",
+    "box": {
+      "center_x": 8.583766666666667,
+      "center_y": 42.02006666666668,
+      "center_z": 8.141566666666666,
+      "size_x": 33.124,
+      "size_y": 22.5,
+      "size_z": 25.591
+    },
+    "vina": {
+      "exhaustiveness": 8,
+      "num_modes": 9,
+      "cpu": 16,
+      "seed": 42
+    }
+  },
+  "exhaustiveness_schedule": [
+    8
+  ],
+  "base_seed": 42,
+  "compounds_total": 6389,
+  "attempted_this_run": 6389,
+  "succeeded_this_run": 6309,
+  "failed_this_run": 80,
+  "ranked_total": 6309,
+  "wall_seconds_this_run": 14189.1,
+  "best": {
+    "id": "BRD-K66911501-003-02-9",
+    "smiles": "O=C(CN1C(=O)C2(CCCC2)NC[C@H]1c1cc(F)cc(F)c1)Nc1ccc2c(c1)C[C@@]1(C2)C(=O)Nc2ncccc21",
+    "label": "MK-3207",
+    "prep_ok": "True",
+    "dock_ok": "True",
+    "affinity": -14.024,
+    "affinity_mean": "-14.024",
+    "affinity_std": "0.0",
+    "n_passes": "1",
+    "affinities_by_pass": "-14.02",
+    "error": ""
+  }
+}

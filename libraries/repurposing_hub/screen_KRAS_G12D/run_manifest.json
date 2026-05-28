@@ -1,0 +1,47 @@
+{
+  "date": "2026-05-28T03:05:48.272196",
+  "config": {
+    "_comment": "PancScan Tier 1 docking config. Receptor + box inherited from the VALIDATED Tier 0 self-dock (MRTX1133/7RPZ re-docked to 0.506 \u00c5). Box = native-ligand bbox + 8 \u00c5 padding, clamped to >=22.5 \u00c5. Do not change the box without re-validating against Tier 0.",
+    "target_pdb": "7RPZ",
+    "target_description": "KRAS G12D + GDP + Mg2+ (MRTX1133 switch-II pocket)",
+    "receptor_pdbqt": "receptor.pdbqt",
+    "box": {
+      "center_x": 1.714,
+      "center_y": 4.927,
+      "center_z": -23.164,
+      "size_x": 28.729,
+      "size_y": 26.682,
+      "size_z": 23.655
+    },
+    "vina": {
+      "exhaustiveness": 8,
+      "num_modes": 9,
+      "cpu": 16,
+      "seed": 42,
+      "_note": "exhaustiveness 8 is the standard VS setting (Tier 0 used 32 for a careful re-dock). Raise for final-stage scoring, not for bulk screening."
+    }
+  },
+  "exhaustiveness_schedule": [
+    8
+  ],
+  "base_seed": 42,
+  "compounds_total": 6389,
+  "attempted_this_run": 6196,
+  "succeeded_this_run": 6118,
+  "failed_this_run": 78,
+  "ranked_total": 6309,
+  "wall_seconds_this_run": 14149.5,
+  "best": {
+    "id": "BRD-K33379087-001-07-5",
+    "smiles": "O=C1NC(=O)[C@@H](c2cn3c4c(cccc24)CCC3)[C@@H]1c1c[nH]c2ccccc12",
+    "label": "tivantinib",
+    "prep_ok": "True",
+    "dock_ok": "True",
+    "affinity": -12.05,
+    "affinity_mean": "-12.05",
+    "affinity_std": "0.0",
+    "n_passes": "1",
+    "affinities_by_pass": "-12.05",
+    "error": ""
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "target": "KRAS_G12V_OFF_9U50",
+  "cif": "9U50.cif",
+  "chain": "A",
+  "ligand_ccd": "A1EN3",
+  "receptor_residues": 170,
+  "ligand_atoms": 46,
+  "template_prep": true,
+  "redock_score_kcal_mol": -14.855,
+  "redock_heavy_rmsd_angstrom": 0.918,
+  "passed": true
+}

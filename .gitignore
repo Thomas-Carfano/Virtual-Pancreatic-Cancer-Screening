@@ -1,0 +1,31 @@
+# Regenerable working data — not committed (reproducible from the scripts)
+data/
+tier1/screen/
+tier2/targets/*/screen/
+tier2/targets/*/ligands/
+tier2/targets/*/poses/
+libraries/*/screen_*/ligands/
+libraries/*/screen_*/poses/
+libraries/*/*/_al/
+
+# Per-ligand prepared/pose files anywhere (large, regenerable)
+**/ligands/
+**/poses/
+*.pdbqt
+!tier1/receptor.pdbqt
+!tier2/targets/*/receptor.pdbqt
+
+# Keep the meaningful outputs: results CSVs, rankings, reports, configs, candidates/
+# (these are explicitly NOT ignored)
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+
+# Large raw structures (re-downloadable from RCSB via the manifest URLs)
+*.cif
+tier1/data/*.pdb

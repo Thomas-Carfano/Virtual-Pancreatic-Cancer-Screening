@@ -1,0 +1,164 @@
+{
+  "tier": 0,
+  "target_pdb": "7RPZ",
+  "target_description": "KRAS G12D + MRTX1133 + GDP + Mg\u00b2\u207a",
+  "ligand_code_used": "6IC",
+  "date_run": "2026-05-26T15:26:39.882426",
+  "environment": {
+    "python": "3.11.15",
+    "vina": "AutoDock Vina v1.2.5",
+    "obabel": "Open Babel 3.1.0 -- Nov 30 2023 -- 21:04:48",
+    "rdkit": "2023.09.6",
+    "Bio": "1.87",
+    "numpy": "1.26.4",
+    "spyrmsd": "0.9.0",
+    "meeko_cli": "found"
+  },
+  "pdb_hetatms": {
+    "GDP": 28,
+    "6IC": 44,
+    "MG": 1,
+    "HOH": 275
+  },
+  "docking_box": {
+    "center_x": 1.7136136363636363,
+    "center_y": 4.92690909090909,
+    "center_z": -23.163636363636364,
+    "size_x": 28.729,
+    "size_y": 26.682000000000002,
+    "size_z": 23.654999999999998,
+    "n_ligand_atoms": 44
+  },
+  "vina_scores": [
+    {
+      "mode": 1,
+      "affinity_kcal_mol": -14.66,
+      "rmsd_lb": 0.0,
+      "rmsd_ub": 0.0
+    },
+    {
+      "mode": 2,
+      "affinity_kcal_mol": -9.013,
+      "rmsd_lb": 2.743,
+      "rmsd_ub": 4.465
+    },
+    {
+      "mode": 3,
+      "affinity_kcal_mol": -8.771,
+      "rmsd_lb": 1.724,
+      "rmsd_ub": 2.926
+    },
+    {
+      "mode": 4,
+      "affinity_kcal_mol": -8.288,
+      "rmsd_lb": 3.602,
+      "rmsd_ub": 9.704
+    },
+    {
+      "mode": 5,
+      "affinity_kcal_mol": -8.229,
+      "rmsd_lb": 4.045,
+      "rmsd_ub": 9.255
+    },
+    {
+      "mode": 6,
+      "affinity_kcal_mol": -8.198,
+      "rmsd_lb": 4.011,
+      "rmsd_ub": 9.211
+    },
+    {
+      "mode": 7,
+      "affinity_kcal_mol": -8.195,
+      "rmsd_lb": 4.361,
+      "rmsd_ub": 7.84
+    },
+    {
+      "mode": 8,
+      "affinity_kcal_mol": -8.074,
+      "rmsd_lb": 4.411,
+      "rmsd_ub": 11.28
+    },
+    {
+      "mode": 9,
+      "affinity_kcal_mol": -7.925,
+      "rmsd_lb": 5.93,
+      "rmsd_ub": 11.46
+    },
+    {
+      "mode": 10,
+      "affinity_kcal_mol": -7.873,
+      "rmsd_lb": 3.094,
+      "rmsd_ub": 9.635
+    },
+    {
+      "mode": 11,
+      "affinity_kcal_mol": -7.873,
+      "rmsd_lb": 4.609,
+      "rmsd_ub": 8.011
+    },
+    {
+      "mode": 12,
+      "affinity_kcal_mol": -7.856,
+      "rmsd_lb": 5.092,
+      "rmsd_ub": 8.223
+    },
+    {
+      "mode": 13,
+      "affinity_kcal_mol": -7.833,
+      "rmsd_lb": 4.605,
+      "rmsd_ub": 8.286
+    },
+    {
+      "mode": 14,
+      "affinity_kcal_mol": -7.798,
+      "rmsd_lb": 4.412,
+      "rmsd_ub": 7.239
+    },
+    {
+      "mode": 15,
+      "affinity_kcal_mol": -7.734,
+      "rmsd_lb": 5.81,
+      "rmsd_ub": 12.24
+    },
+    {
+      "mode": 16,
+      "affinity_kcal_mol": -7.66,
+      "rmsd_lb": 4.626,
+      "rmsd_ub": 7.942
+    },
+    {
+      "mode": 17,
+      "affinity_kcal_mol": -7.491,
+      "rmsd_lb": 5.496,
+      "rmsd_ub": 11.89
+    },
+    {
+      "mode": 18,
+      "affinity_kcal_mol": -7.399,
+      "rmsd_lb": 5.221,
+      "rmsd_ub": 11.75
+    },
+    {
+      "mode": 19,
+      "affinity_kcal_mol": -7.386,
+      "rmsd_lb": 5.434,
+      "rmsd_ub": 9.769
+    },
+    {
+      "mode": 20,
+      "affinity_kcal_mol": -7.379,
+      "rmsd_lb": 5.392,
+      "rmsd_ub": 11.18
+    }
+  ],
+  "top_pose_score_kcal_mol": -14.66,
+  "rmsd_top_pose_vs_crystal_angstrom": 0.5062335743687707,
+  "acceptance_criteria": {
+    "ligand_code_6IC_present_in_pdb": true,
+    "GDP_cofactor_present": true,
+    "Mg_cofactor_present": true,
+    "rmsd_under_2_angstrom": true,
+    "top_score_under_minus_8": true
+  },
+  "passed": true
+}

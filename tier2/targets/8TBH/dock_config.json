@@ -1,0 +1,19 @@
+{
+  "_comment": "KRAS_G12R_ON_RMC7977_CYPA_8TBH: receptor+box from 8TBH.cif chain A,C, native ligand ZNI. Validated by native redock.",
+  "target": "KRAS_G12R_ON_RMC7977_CYPA_8TBH",
+  "receptor_pdbqt": "receptor.pdbqt",
+  "box": {
+    "center_x": -3.6485967741935483,
+    "center_y": -13.788741935483868,
+    "center_z": 33.00724193548386,
+    "size_x": 30.573999999999998,
+    "size_y": 36.775999999999996,
+    "size_z": 23.897000000000002
+  },
+  "vina": {
+    "exhaustiveness": 8,
+    "num_modes": 9,
+    "cpu": 16,
+    "seed": 42
+  }
+}

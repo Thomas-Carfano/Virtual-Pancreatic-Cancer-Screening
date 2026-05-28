@@ -1,0 +1,19 @@
+{
+  "_comment": "KRAS_G12V_OFF_9U50: receptor+box from 9U50.cif chain A, native ligand A1EN3. Validated by native redock.",
+  "target": "KRAS_G12V_OFF_9U50",
+  "receptor_pdbqt": "receptor.pdbqt",
+  "box": {
+    "center_x": -1.7398043478260872,
+    "center_y": -12.11317391304348,
+    "center_z": 11.926195652173913,
+    "size_x": 27.951,
+    "size_y": 27.092999999999996,
+    "size_z": 25.436
+  },
+  "vina": {
+    "exhaustiveness": 8,
+    "num_modes": 9,
+    "cpu": 16,
+    "seed": 42
+  }
+}
