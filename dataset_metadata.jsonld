@@ -4,8 +4,8 @@
   "name": "PancScan: open virtual screening for pancreatic cancer",
   "alternateName": "PancScan docking candidate dataset",
   "description": "Open, reproducible structure-based virtual-screening results for pancreatic ductal adenocarcinoma (PDAC). AutoDock Vina molecular docking was used to screen ~6,400 approved/clinical drugs (Broad Drug Repurposing Hub) against validated drug targets (KRAS G12D, KRAS G12V, KRAS G12R tri-complex, PARP1). The dataset contains ranked predicted binding affinities (kcal/mol), native-redock pose-accuracy validation (RMSD), and enrichment-gate statistics (ROC-AUC, enrichment factor, BEDROC). Results are computational hypotheses for wet-lab follow-up, not confirmed binders or medical claims.",
-  "url": "https://github.com/USERNAME/pancscan",
-  "sameAs": "https://github.com/USERNAME/pancscan",
+  "url": "https://github.com/Thomas-Carfano/Boinctype-Pancreatic-Cancer",
+  "sameAs": "https://github.com/Thomas-Carfano/Boinctype-Pancreatic-Cancer",
   "version": "1.0.0",
   "dateModified": "2026-05-28",
   "isAccessibleForFree": true,
@@ -86,19 +86,19 @@
       "@type": "DataDownload",
       "name": "KRAS G12D ranked screening results",
       "encodingFormat": "text/csv",
-      "contentUrl": "https://github.com/USERNAME/pancscan/blob/main/libraries/repurposing_hub/screen_KRAS_G12D/results_ranked.csv"
+      "contentUrl": "https://github.com/Thomas-Carfano/Boinctype-Pancreatic-Cancer/blob/main/libraries/repurposing_hub/screen_KRAS_G12D/results_ranked.csv"
     },
     {
       "@type": "DataDownload",
       "name": "PARP1 ranked screening results",
       "encodingFormat": "text/csv",
-      "contentUrl": "https://github.com/USERNAME/pancscan/blob/main/libraries/repurposing_hub/screen_PARP1/results_ranked.csv"
+      "contentUrl": "https://github.com/Thomas-Carfano/Boinctype-Pancreatic-Cancer/blob/main/libraries/repurposing_hub/screen_PARP1/results_ranked.csv"
     },
     {
       "@type": "DataDownload",
       "name": "Curated top candidates (per target)",
       "encodingFormat": "text/csv",
-      "contentUrl": "https://github.com/USERNAME/pancscan/tree/main/candidates"
+      "contentUrl": "https://github.com/Thomas-Carfano/Boinctype-Pancreatic-Cancer/tree/main/candidates"
     }
   ]
 }

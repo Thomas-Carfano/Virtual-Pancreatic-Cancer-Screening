@@ -32,7 +32,7 @@ license-url: "https://opensource.org/licenses/MIT"
 version: "1.0.0"
 date-released: "2026-05-28"
 # TODO: set this to your repository URL after creating it on GitHub
-repository-code: "https://github.com/USERNAME/pancscan"
+repository-code: "https://github.com/Thomas-Carfano/Boinctype-Pancreatic-Cancer"
 references:
   - type: article
     authors:
