@@ -1,0 +1,50 @@
+cff-version: 1.2.0
+title: "PancScan: open virtual screening for pancreatic cancer"
+message: "If you use this software or data, please cite it as below."
+type: dataset
+authors:
+  - given-names: Thomas
+    family-names: Carfano
+    email: tcarfano@kixie.com
+abstract: >-
+  PancScan is an open-source, reproducible structure-based virtual-screening
+  pipeline for pancreatic ductal adenocarcinoma (PDAC). It uses AutoDock Vina
+  molecular docking on commodity CPU hardware to screen compound libraries
+  against validated drug targets (KRAS G12D, KRAS G12V, KRAS G12R tri-complex,
+  and PARP1) and produces ranked candidate lists with native-redock and
+  enrichment validation. Outputs are computational hypotheses requiring
+  experimental confirmation, not medical claims.
+keywords:
+  - pancreatic cancer
+  - PDAC
+  - KRAS G12D
+  - KRAS G12V
+  - PARP1
+  - molecular docking
+  - AutoDock Vina
+  - virtual screening
+  - drug repurposing
+  - structure-based drug discovery
+  - cheminformatics
+  - open science
+license: MIT
+license-url: "https://opensource.org/licenses/MIT"
+version: "1.0.0"
+date-released: "2026-05-28"
+# TODO: set this to your repository URL after creating it on GitHub
+repository-code: "https://github.com/USERNAME/pancscan"
+references:
+  - type: article
+    authors:
+      - family-names: Trott
+        given-names: Oleg
+      - family-names: Olson
+        given-names: "Arthur J."
+    title: "AutoDock Vina: improving the speed and accuracy of docking with a new scoring function, efficient optimization and multithreading"
+    journal: "Journal of Computational Chemistry"
+    year: 2010
+    volume: 31
+    issue: 2
+    start: 455
+    end: 461
+    doi: "10.1002/jcc.21334"

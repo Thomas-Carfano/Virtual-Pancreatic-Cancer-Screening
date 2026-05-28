@@ -1,0 +1,104 @@
+{
+  "@context": "https://schema.org/",
+  "@type": "Dataset",
+  "name": "PancScan: open virtual screening for pancreatic cancer",
+  "alternateName": "PancScan docking candidate dataset",
+  "description": "Open, reproducible structure-based virtual-screening results for pancreatic ductal adenocarcinoma (PDAC). AutoDock Vina molecular docking was used to screen ~6,400 approved/clinical drugs (Broad Drug Repurposing Hub) against validated drug targets (KRAS G12D, KRAS G12V, KRAS G12R tri-complex, PARP1). The dataset contains ranked predicted binding affinities (kcal/mol), native-redock pose-accuracy validation (RMSD), and enrichment-gate statistics (ROC-AUC, enrichment factor, BEDROC). Results are computational hypotheses for wet-lab follow-up, not confirmed binders or medical claims.",
+  "url": "https://github.com/USERNAME/pancscan",
+  "sameAs": "https://github.com/USERNAME/pancscan",
+  "version": "1.0.0",
+  "dateModified": "2026-05-28",
+  "isAccessibleForFree": true,
+  "creator": {
+    "@type": "Person",
+    "name": "Thomas Carfano",
+    "email": "tcarfano@kixie.com"
+  },
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "pancreatic cancer",
+    "pancreatic ductal adenocarcinoma",
+    "PDAC",
+    "KRAS G12D",
+    "KRAS G12V",
+    "KRAS G12R",
+    "PARP1",
+    "molecular docking",
+    "AutoDock Vina",
+    "virtual screening",
+    "drug repurposing",
+    "structure-based drug discovery",
+    "cheminformatics",
+    "open science",
+    "MRTX1133"
+  ],
+  "measurementTechnique": [
+    "molecular docking (AutoDock Vina 1.2.5)",
+    "native-ligand redocking validation (symmetry-corrected heavy-atom RMSD)",
+    "retrospective enrichment analysis (ROC-AUC, enrichment factor, BEDROC)"
+  ],
+  "variableMeasured": [
+    {
+      "@type": "PropertyValue",
+      "name": "predicted binding affinity",
+      "description": "AutoDock Vina predicted binding free energy of the best docked pose",
+      "unitText": "kcal/mol"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "redock RMSD",
+      "description": "symmetry-corrected heavy-atom RMSD between docked and crystal pose",
+      "unitText": "angstrom"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "enrichment ROC-AUC",
+      "description": "area under the ROC curve for ranking known actives above decoys (0.5 random, 1.0 perfect)"
+    }
+  ],
+  "about": [
+    { "@type": "MedicalCondition", "name": "Pancreatic ductal adenocarcinoma" },
+    { "@type": "Gene", "name": "KRAS" },
+    { "@type": "Gene", "name": "PARP1" }
+  ],
+  "citation": "Trott O, Olson AJ. AutoDock Vina. J Comput Chem. 2010;31(2):455-461. doi:10.1002/jcc.21334",
+  "creditText": "PancScan, an open self-funded pancreatic-cancer screening project (T. Carfano).",
+  "disclaimer": "Computational predictions only. Outputs are hypotheses requiring experimental validation and are not medical advice, diagnosis, or treatment, and make no claim of therapeutic efficacy or safety.",
+  "isBasedOn": [
+    {
+      "@type": "Dataset",
+      "name": "Broad Drug Repurposing Hub",
+      "url": "https://repo-hub.broadinstitute.org/repurposing"
+    },
+    {
+      "@type": "Dataset",
+      "name": "ChEMBL",
+      "url": "https://www.ebi.ac.uk/chembl/"
+    },
+    {
+      "@type": "Dataset",
+      "name": "RCSB Protein Data Bank",
+      "url": "https://www.rcsb.org/"
+    }
+  ],
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "name": "KRAS G12D ranked screening results",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://github.com/USERNAME/pancscan/blob/main/libraries/repurposing_hub/screen_KRAS_G12D/results_ranked.csv"
+    },
+    {
+      "@type": "DataDownload",
+      "name": "PARP1 ranked screening results",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://github.com/USERNAME/pancscan/blob/main/libraries/repurposing_hub/screen_PARP1/results_ranked.csv"
+    },
+    {
+      "@type": "DataDownload",
+      "name": "Curated top candidates (per target)",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://github.com/USERNAME/pancscan/tree/main/candidates"
+    }
+  ]
+}
