@@ -1,5 +1,9 @@
 # KRAS G12D — repurposing candidate handoff
 
+> **In one sentence:** of ~6,400 existing approved/clinical drugs, these are the ones a computer
+> predicts might fit the most common pancreatic-cancer driver protein (KRAS G12D) — ranked **leads
+> to test in a lab**, not proven drugs or medical advice.
+
 **Target:** KRAS G12D switch-II pocket (PDB **7RPZ**, MRTX1133-binding site).
 **Library:** Broad Drug Repurposing Hub, 6,389 approved/clinical drugs.
 **Engine validation:** AutoDock Vina 1.2.5 — MRTX1133 self-redock **0.506 Å**; enrichment gate (40 known G12D actives vs 600 property-matched ChEMBL decoys) **ROC-AUC 0.690 / EF 1% 6.56×**. Modest discrimination — treat rankings as noisy, trust clusters not ranks.

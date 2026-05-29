@@ -1,45 +1,52 @@
-# PancScan@home — repurposing candidate handoff
+# PancScan — repurposing candidates
 
-An open virtual-screening pipeline pointed at two validated pancreatic-cancer targets,
-then run against the **Broad Drug Repurposing Hub** (~6,400 approved/clinical drugs).
-The output is *prioritized hypotheses* for wet-lab follow-up — not confirmed binders.
+These are the ranked results: existing approved/clinical drugs scored by how well they fit two
+validated pancreatic-cancer targets. They are **prioritized leads for laboratory testing — not
+confirmed binders, and not medical advice.** (See the main project [README](../README.md) for
+how this works and its limitations.)
 
-## Targets
+The drug library screened was the **Broad Drug Repurposing Hub** (~6,400 approved/clinical drugs).
 
-| Target | PDB | Redock RMSD | Gate ROC-AUC | EF 1% | Strength |
+## Targets screened
+
+| Target | Structure (PDB) | Pose-recovery accuracy | Fairness score (ROC-AUC) | Top-1% enrichment | Confidence |
 |---|---|---|---|---|---|
-| **KRAS G12D** | 7RPZ | 0.506 Å | 0.690 | 6.56× | Modest — Vina scoring-limited; rankings noisy |
-| **PARP1 catalytic** | 9ETQ | 0.898 Å | **0.874** | **15.25×** | Strong — engine cleanly discriminates known PARP inhibitors |
+| **KRAS G12D** | 7RPZ | 0.51 Å | 0.690 | 6.6× | Modest — rankings are noisy; treat as starting points. |
+| **PARP1** | 9ETQ | 0.90 Å | **0.874** | **15.3×** | Strong — the engine cleanly separates known PARP drugs from look-alikes. |
 
-Engine: AutoDock Vina 1.2.5, exhaustiveness 8, Meeko/OpenBabel prep with Dimorphite-DL pH-7.4 protonation.
+## Files in this folder
 
-## Files
-
-| File | Description |
+| File | What it is |
 |---|---|
-| `G12D/top50.csv` · `G12D/HANDOFF.md` | Top 50 ranked candidates against KRAS G12D + 1-page wet-lab handoff |
-| `G12D/top25_selective.csv` | KRAS-selective hits (NOT in PARP1 top-200) — the real repurposing leads |
-| `PARP1/top50.csv` · `PARP1/HANDOFF.md` | Top 50 vs PARP1 + 1-page handoff |
-| `PARP1/top25_selective.csv` | PARP1-selective hits (NOT in G12D top-200) |
-| `cross_target_overlap.csv` | 20 drugs in top-100 of *both* — mostly generic shape-fitters (incl. olaparib/EB-47 as sanity controls) |
+| `<target>/top50.csv` | The 50 best-scoring drugs for that target. |
+| `<target>/top25_selective.csv` | Hits high on *this* target but **not** the other — the more target-specific leads. |
+| `<target>/HANDOFF.md` | A one-page summary a laboratory can act on (target background + suggested first experiment). |
+| `cross_target_overlap.csv` | Drugs that score well on **both** targets — mostly generic "fits-many-pockets" molecules (includes olaparib and EB-47, which act as built-in sanity checks). |
 
-## How to read these
+## How to read these results
 
-- **Trust the cluster, not the rank.** Vina has ±3 kcal/mol error (per the original paper). A drug at rank 5 vs 15 is mostly noise. What matters: which drugs cluster at the top, do they share chemistry, do any have plausible biology?
-- **Target-selective lists are the most interesting.** A drug high on *only one* target is a more specific lead than one high on both (those are typically generic kinase-ATP chemotypes).
-- **Hits = hypotheses.** The next steps are (1) better scoring via GNINA (GPU), (2) short MD simulation, (3) wet-lab binding/cell assay. See per-target `HANDOFF.md` for the suggested first assay.
+- **Trust the cluster, not the exact rank.** The scoring has ~±3 kcal/mol of error, so #5 vs #15
+  is mostly noise. What matters is *which kinds of drugs* land at the top and whether that makes
+  biological sense.
+- **The target-selective lists are the most interesting** — a drug specific to one target is a
+  cleaner lead than one that sticks to everything.
+- **Every hit is a hypothesis,** to be confirmed (or ruled out) in a lab. See each `HANDOFF.md`
+  for the recommended first experiment.
 
-## Reproducibility
+## How these were produced (reproducibility)
 
-- Code: `pancscan/` (open source, Apache 2.0 spirit).
-- Library: Broad Drug Repurposing Hub samples (free, non-commercial).
-- Structures: RCSB PDB. Validation actives/decoys: ChEMBL (CC BY-SA 3.0).
-- Hardware: M4 Max (16 cores), AutoDock Vina, RDKit/Meeko, scikit-learn — all open-source.
+- **Code:** the `pancscan/` pipeline in this repository (open source).
+- **Drug library:** Broad Drug Repurposing Hub samples (free, non-commercial use).
+- **Protein structures:** RCSB Protein Data Bank. **Validation data:** ChEMBL (CC BY-SA 3.0).
+- **Hardware:** an ordinary 16-core laptop CPU — AutoDock Vina, RDKit/Meeko, scikit-learn, all open-source.
 
 ## Honest framing
 
-This is the *computational top-of-funnel*. KRAS G12D rankings are *modest* (AUC 0.69) — treat as starting points, not endpoints. PARP1 rankings are *strong* (AUC 0.87) — more trustworthy, still hypotheses. Wet-lab confirmation is required before any biological claim. **Step 1 of 5** in a drug-discovery pipeline.
+This is the **computational first step** of drug discovery. KRAS G12D rankings are *modest*
+(treat as starting points); PARP1 rankings are *strong* (more trustworthy, still hypotheses).
+Laboratory confirmation is required before any biological claim.
 
 ## Contact
 
-Open self-funded project. Lead: Thomas Carfano (tcarfano@kixie.com). Wet-lab collaborators welcome — see per-target `HANDOFF.md` for the recommended first assay.
+Self-funded open project. Lead: **Thomas Carfano** (tomcarfano@gmail.com). Laboratory
+collaborators welcome — each `HANDOFF.md` lists a recommended first assay.

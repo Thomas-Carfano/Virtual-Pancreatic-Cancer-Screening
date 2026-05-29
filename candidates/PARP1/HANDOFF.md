@@ -1,5 +1,9 @@
 # PARP1 — repurposing candidate handoff
 
+> **In one sentence:** of ~6,400 existing approved/clinical drugs, these are the ones a computer
+> predicts might fit PARP1 — a protein that BRCA-mutated pancreatic tumors are especially
+> vulnerable to — ranked **leads to test in a lab**, not proven drugs or medical advice.
+
 **Target:** PARP1 catalytic domain (PDB **9ETQ**, AZD5305 / saruparib pocket — the NAD⁺-binding site).
 **Library:** Broad Drug Repurposing Hub, 6,389 approved/clinical drugs.
 **Engine validation:** AutoDock Vina 1.2.5 — AZD5305 self-redock **0.898 Å**; enrichment gate (40 known PARP1 actives vs 586 property-matched ChEMBL decoys) **ROC-AUC 0.874 / EF 1% 15.25× / BEDROC 0.76**. **Strong** discrimination — most trustworthy ranking in this project.

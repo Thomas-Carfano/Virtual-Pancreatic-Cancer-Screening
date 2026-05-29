@@ -1,0 +1,45 @@
+{
+  "date": "2026-05-28T19:41:57.117296",
+  "config": {
+    "_comment": "KRAS_G12V_OFF_9U50: receptor+box from 9U50.cif chain A, native ligand A1EN3. Validated by native redock.",
+    "target": "KRAS_G12V_OFF_9U50",
+    "receptor_pdbqt": "receptor.pdbqt",
+    "box": {
+      "center_x": -1.7398043478260872,
+      "center_y": -12.11317391304348,
+      "center_z": 11.926195652173913,
+      "size_x": 27.951,
+      "size_y": 27.092999999999996,
+      "size_z": 25.436
+    },
+    "vina": {
+      "exhaustiveness": 8,
+      "num_modes": 9,
+      "cpu": 16,
+      "seed": 42
+    }
+  },
+  "exhaustiveness_schedule": [
+    8
+  ],
+  "base_seed": 42,
+  "compounds_total": 6389,
+  "attempted_this_run": 2114,
+  "succeeded_this_run": 2086,
+  "failed_this_run": 28,
+  "ranked_total": 6309,
+  "wall_seconds_this_run": 4694.8,
+  "best": {
+    "id": "BRD-A30984645-001-01-5",
+    "smiles": "Cc1c(NC(=O)c2cc3c(s2)CCCC3)cccc1-c1cn(C)c(=O)c(Nc2ccc([C@H]3C(=O)N(C)CCN3C)cc2)n1",
+    "label": "GDC-0834",
+    "prep_ok": "True",
+    "dock_ok": "True",
+    "affinity": -11.739,
+    "affinity_mean": "-11.739",
+    "affinity_std": "0.0",
+    "n_passes": "1",
+    "affinities_by_pass": "-11.74",
+    "error": ""
+  }
+}

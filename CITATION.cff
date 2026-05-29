@@ -5,7 +5,7 @@ type: dataset
 authors:
   - given-names: Thomas
     family-names: Carfano
-    email: tcarfano@kixie.com
+    email: tomcarfano@gmail.com
 abstract: >-
   PancScan is an open-source, reproducible structure-based virtual-screening
   pipeline for pancreatic ductal adenocarcinoma (PDAC). It uses AutoDock Vina
