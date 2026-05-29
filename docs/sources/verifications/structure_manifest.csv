@@ -1,0 +1,20 @@
+pdb_id,rcsb_title,mutation,nucleotide_state,ligand_id,ligand_name,ligand_role,organism,construct_range,resolution_A,method,biological_assembly,validation_date,validated_by,allowed_use,notes
+7RPZ,"KRAS G12D in complex with MRTX-1133",G12D,GDP,6IC,MRTX1133,inhibitor,Homo sapiens,1-170,1.30,X-ray,monomer,2026-05-22,audit-N,docking + MD anchor,"Canonical KRAS G12D + MRTX1133 + Mg²⁺. R-work 0.150 / R-free 0.171."
+6GJ7,"CRYSTAL STRUCTURE OF KRAS G12D (GPPCP) IN COMPLEX WITH 22",G12D,GppCp (GTP-mimetic active state),F0B,BI-2852,inhibitor,Homo sapiens,not-recorded,1.67,X-ray,not-recorded,2026-05-22,audit-N,orthogonal validation,"GppCp not GDP — orthogonality includes nucleotide state. BI-2852 binds switch-I/II interface. IC50 450-870 nM."
+6OIM,"Crystal Structure of human KRAS G12C covalently bound to AMG 510",G12C (plus engineering mutations),not-recorded,not-recorded,sotorasib (AMG 510),inhibitor (covalent),Homo sapiens,not-recorded,1.65,X-ray,not-recorded,2026-05-22,audit-N,reference structure,"FDA-approved drug. Canon Nature 2019."
+6UT0,"Identification of the Clinical Development Candidate MRTX849",G12C (plus engineering mutations),not-recorded,M1X,adagrasib (MRTX849),inhibitor (covalent),Homo sapiens,not-recorded,1.94,X-ray,not-recorded,2026-05-22,audit-N,reference structure,"FDA-approved drug."
+9PZY,"KRAS G12C with divarasib",G12C,GDP,not-recorded,divarasib (GDC-6036),inhibitor (covalent),Homo sapiens,not-recorded,not-recorded,X-ray,not-recorded,2026-05-22,audit-N,reference structure,"Divarasib still investigational as of May 2026."
+9DMM,"KRAS G12C with divarasib (Shokat lab deposition)",G12C,not-recorded,not-recorded,divarasib (GDC-6036),inhibitor (covalent),Homo sapiens,not-recorded,not-recorded,X-ray,not-recorded,2026-05-22,audit-N,reference structure,"Second divarasib entry. Fernando/Craven/Shokat 2024."
+9BR4,"Rezatapopt + Y220C p53 DBD",p53 Y220C,n/a,not-recorded (rezatapopt heavy-atom ID),rezatapopt (PC14586/PC-9859),stabilizer,Homo sapiens,DBD (94-312 region),1.70,X-ray,not-recorded,2026-05-22,audit-N,Y220C docking anchor,"Verified rezatapopt + Y220C structure (Abendroth/Lorimer/Vu/Tanaka deposition). Use this for rezatapopt self-docking — NOT 8A32 (which has ligand KVA, a different chemotype-class stabilizer)."
+2VUK,"Crystal structure of p53 Y220C in complex with PhiKan083 (Boeckler 2008)",p53 Y220C,n/a,not-recorded,PhiKan083,stabilizer,Homo sapiens,DBD,not-recorded,X-ray,not-recorded,2026-05-22,audit-N,Y220C fallback anchor,"Original Fersht-lab Y220C cavity discovery; first-generation carbazole stabilizer."
+,,,,,,,,,,,,,,,
+# Examples below are placeholders for entries that need verification before use,,,,,,,,,,,,,,,
+KRAS-G12D-apo,UNVERIFIED — no canonical apo PDB ID in our manifest yet,G12D,apo (required),none (required),—,—,—,—,—,—,—,NEEDS SELECTION,—,quarantined,"None of 8AZV / 8AZY-stripped / 4DSO / 7T47 are true G12D apo. Likely need MD-derived apo conformer from a holo crystal."
+,,,,,,,,,,,,,,,
+# Format notes:,,,,,,,,,,,,,,,
+# 1. Use 'not-recorded' for fields we haven't pulled from RCSB yet (acceptable),,,,,,,,,,,,,,,
+# 2. Use 'UNVERIFIED' or 'NEEDS SELECTION' for blocking unknowns (blocks pipeline use),,,,,,,,,,,,,,,
+# 3. validation_date should always be present; re-validate if older than 90 days,,,,,,,,,,,,,,,
+# 4. validated_by: 'audit-N' / 'audit-K' / 'manual-YYYY-MM-DD' / 'reviewer-name',,,,,,,,,,,,,,,
+# 5. allowed_use options: 'docking anchor' / 'MD anchor' / 'reference structure' / 'background only' / 'quarantined',,,,,,,,,,,,,,,
+# 6. Any PDB ID not in this file should NOT be used in a pipeline workflow until added with full provenance,,,,,,,,,,,,,,,
