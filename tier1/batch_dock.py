@@ -69,7 +69,7 @@ def dock_one(smiles, cid, label, cfg, dirs, receptor_pdbqt, cpu, exh_list, base_
     row["prep_ok"] = True
 
     b, v = cfg["box"], cfg["vina"]
-    affs, best, last_err = [], None, ""
+    affs, exh_done, best, last_err = [], [], None, ""
     for i, exh in enumerate(exh_list):
         tmp = dirs["poses"] / f"{cid}.p{i}.pdbqt"
         cmd = ["vina",
@@ -91,6 +91,7 @@ def dock_one(smiles, cid, label, cfg, dirs, receptor_pdbqt, cpu, exh_list, base_
             last_err = "no VINA RESULT parsed"
             continue
         affs.append(a)
+        exh_done.append(exh)
         if best is None or a < best[0]:
             best = (a, i)
 
@@ -115,7 +116,13 @@ def dock_one(smiles, cid, label, cfg, dirs, receptor_pdbqt, cpu, exh_list, base_
     row["affinity_mean"] = round(statistics.fmean(affs), 3)
     row["affinity_std"] = round(statistics.pstdev(affs), 3) if len(affs) > 1 else 0.0
     row["n_passes"] = len(affs)
-    row["affinities_by_pass"] = ";".join(f"{a:.2f}" for a in affs)
+    row["affinities_by_pass"] = ";".join(f"{e}:{a:.3f}" for e, a in zip(exh_done, affs))
+    # Flag partial multi-pass runs: if the deepest pass(es) failed/timed out, the best-of
+    # consensus came from shallower search only. Keep dock_ok=True but record it, so ligands
+    # aren't silently ranked against each other at inconsistent search depth.
+    if len(affs) < len(exh_list):
+        missing = [e for e in exh_list if e not in exh_done]
+        row["error"] = f"partial: {len(affs)}/{len(exh_list)} passes ok, missing exh={missing} ({last_err[:50]})"
     return row
 
 

@@ -85,6 +85,20 @@ def load_docked(results_csv):
     return out
 
 
+def load_attempted(results_csv):
+    """All ids ever attempted (docked OR failed). Used so failures aren't re-submitted every
+    iteration — without it, persistently-failing compounds get re-docked forever and the loop
+    can stall (failures never count toward the docked budget)."""
+    out = set()
+    if not Path(results_csv).exists():
+        return out
+    with open(results_csv) as f:
+        for r in csv.DictReader(f):
+            if r.get("id"):
+                out.add(r["id"])
+    return out
+
+
 def write_batch_csv(path, rows):
     with open(path, "w", newline="") as f:
         w = csv.writer(f)
@@ -139,24 +153,33 @@ def main():
     if bad:
         print(f"  {len(bad)} compounds unparseable -> excluded from selection")
 
-    seed_n = max(2, int(round(args.seed_frac * n)))
-    batch_n = max(1, int(round(args.batch_frac * n)))
-    max_n = int(round(args.max_frac * n))
+    n_dockable = n - len(bad)        # unparseable compounds can never be docked
+    seed_n = max(2, int(round(args.seed_frac * n_dockable)))
+    batch_n = max(1, int(round(args.batch_frac * n_dockable)))
+    max_n = min(int(round(args.max_frac * n_dockable)), n_dockable)
 
     docked = load_docked(results_csv)
-    print(f"start: {len(docked)} already docked, budget {max_n}/{n} ({100*args.max_frac:.0f}%)")
+    attempted = load_attempted(results_csv)
+    print(f"start: {len(docked)} docked, {len(attempted)} attempted; "
+          f"budget {max_n}/{n_dockable} dockable ({100*args.max_frac:.0f}%)")
 
     rng = np.random.default_rng(args.seed)
     log = json.loads(log_path.read_text()) if log_path.exists() else []
     iter_i = len(log)
 
     while len(docked) < max_n:
-        is_seed = (len(docked) == 0)
-        undocked_idx = [i for i, cid in enumerate(ids) if cid not in docked and i not in bad]
+        # Seed phase continues until seed_n compounds are docked — do NOT infer "seed done"
+        # from "docked is non-empty", or a tiny leftover partial run will skip seeding and
+        # bootstrap the surrogate on a handful of points (a real bug we hit once).
+        is_seed = (len(docked) < seed_n)
+        undocked_idx = [i for i, cid in enumerate(ids) if cid not in attempted and i not in bad]
         if not undocked_idx:
-            print("no undocked compounds left.")
+            print("no untried dockable compounds left.")
             break
-        take = min((seed_n if is_seed else batch_n), max_n - len(docked), len(undocked_idx))
+        if is_seed:
+            take = min(seed_n - len(docked), max_n - len(docked), len(undocked_idx))
+        else:
+            take = min(batch_n, max_n - len(docked), len(undocked_idx))
 
         if is_seed:
             sel = rng.choice(undocked_idx, size=take, replace=False).tolist()
@@ -187,6 +210,7 @@ def main():
 
         prev = docked
         docked = load_docked(results_csv)
+        attempted = load_attempted(results_csv)
         new_ok = len(docked) - len(prev)
         new_actuals = [docked[ids[i]] for i in sel if ids[i] in docked and ids[i] not in prev]
 

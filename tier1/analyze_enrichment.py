@@ -22,20 +22,26 @@ import argparse
 from pathlib import Path
 
 
-def load(results_csv, score_col="affinity"):
+def load(results_csv, score_col="affinity", fail_score=1e9):
+    """Load actives/decoys by label. Failed docks are ranked WORST (sentinel score), not
+    dropped — dropping them silently biases AUC/EF if actives and decoys fail at different
+    rates (a failed dock is a failed prediction and should count against the method)."""
     actives, decoys = [], []
-    n_fail = 0
+    n_fail_active = n_fail_decoy = 0
     for r in csv.DictReader(open(results_csv)):
-        if r.get("dock_ok") != "True" or r.get(score_col) in ("", None):
-            n_fail += 1
-            continue
-        aff = float(r[score_col])
         lab = (r.get("label") or "").lower()
+        ok = r.get("dock_ok") == "True" and r.get(score_col) not in ("", None)
+        aff = float(r[score_col]) if ok else fail_score   # fail_score => ranks last
+        if not ok:
+            if lab == "active":
+                n_fail_active += 1
+            elif lab == "decoy":
+                n_fail_decoy += 1
         if lab == "active":
             actives.append(aff)
         elif lab == "decoy":
             decoys.append(aff)
-    return actives, decoys, n_fail
+    return actives, decoys, n_fail_active, n_fail_decoy
 
 
 def roc_auc(actives, decoys):
@@ -66,7 +72,7 @@ def enrichment_factor(actives, decoys, frac):
     total = na + nd
     n_top = max(1, math.ceil(frac * total))
     scored = [(-a, 1) for a in actives] + [(-d, 0) for d in decoys]
-    scored.sort(key=lambda x: x[0], reverse=True)   # best (highest -aff) first
+    scored.sort(key=lambda x: (x[0], -x[1]), reverse=True)   # best first; ties broken against actives
     top_active = sum(lab for _, lab in scored[:n_top])
     return (top_active / n_top) / (na / total)
 
@@ -80,7 +86,7 @@ def _bedroc_clean(scored, na, n, alpha):
 
 
 def verdict(auc, ef1):
-    if auc >= 0.70 and ef1 >= 5:
+    if auc >= 0.75 and ef1 >= 5:
         return "STRONG enrichment — the engine discriminates known binders well."
     if auc >= 0.60:
         return "MODEST enrichment — real signal; GNINA rescoring (Stage 3) recommended before trusting hits."
@@ -97,7 +103,8 @@ def main():
                     help="rank by 'affinity' (best-of-N consensus) or 'affinity_mean'")
     args = ap.parse_args()
 
-    actives, decoys, n_fail = load(args.results, args.score_col)
+    actives, decoys, n_fail_active, n_fail_decoy = load(args.results, args.score_col)
+    n_fail = n_fail_active + n_fail_decoy
     na, nd = len(actives), len(decoys)
     if na == 0 or nd == 0:
         print(f"ERROR: need both actives and decoys (got {na} actives, {nd} decoys).")
@@ -106,14 +113,17 @@ def main():
     auc = roc_auc(actives, decoys)
     ef = {f: enrichment_factor(actives, decoys, f) for f in (0.01, 0.05, 0.10)}
     bed = _bedroc_clean(
-        sorted([(-a, 1) for a in actives] + [(-d, 0) for d in decoys], key=lambda x: x[0], reverse=True),
+        sorted([(-a, 1) for a in actives] + [(-d, 0) for d in decoys], key=lambda x: (x[0], -x[1]), reverse=True),
         na, na + nd, 20.0)
-    mean_a = sum(actives) / na
-    mean_d = sum(decoys) / nd
+    real_a = [a for a in actives if a < 1e8]   # exclude failed-dock sentinels from the mean
+    real_d = [d for d in decoys if d < 1e8]
+    mean_a = sum(real_a) / len(real_a) if real_a else float("nan")
+    mean_d = sum(real_d) / len(real_d) if real_d else float("nan")
     v = verdict(auc, ef[0.01])
 
     rep = {
         "n_actives": na, "n_decoys": nd, "n_failed_docks": n_fail,
+        "failed_docks_active": n_fail_active, "failed_docks_decoy": n_fail_decoy,
         "roc_auc": round(auc, 3),
         "ef_1pct": round(ef[0.01], 2), "ef_5pct": round(ef[0.05], 2), "ef_10pct": round(ef[0.10], 2),
         "bedroc_alpha20": round(bed, 3),
@@ -123,8 +133,8 @@ def main():
     }
 
     print("\n================ Tier 1 Enrichment Gate ================")
-    print(f"actives docked : {na}")
-    print(f"decoys docked  : {nd}   (failed docks: {n_fail})")
+    print(f"actives : {na}  ({n_fail_active} failed dock, ranked worst)")
+    print(f"decoys  : {nd}  ({n_fail_decoy} failed dock, ranked worst)")
     print(f"ROC-AUC        : {auc:.3f}   (0.5 random, 1.0 perfect)")
     print(f"EF  1%         : {ef[0.01]:.2f}x")
     print(f"EF  5%         : {ef[0.05]:.2f}x")

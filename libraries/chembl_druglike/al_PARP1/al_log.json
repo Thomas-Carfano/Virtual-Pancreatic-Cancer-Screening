@@ -1,0 +1,13 @@
+[
+  {
+    "iter": 0,
+    "strategy": "greedy_top_predicted",
+    "submitted": 10000,
+    "newly_docked_ok": 9375,
+    "cumulative_docked": 9378,
+    "wall_s": 19503.2,
+    "batch_mean_actual": -9.788,
+    "surrogate_train_n": 3,
+    "predicted_top_batch_mean": -9.71
+  }
+]

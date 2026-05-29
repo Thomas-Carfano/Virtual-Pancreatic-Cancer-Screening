@@ -1,0 +1,45 @@
+{
+  "date": "2026-05-29T07:46:05.530831",
+  "config": {
+    "_comment": "PARP1_CAT_AZD5305_9ETQ: receptor+box from 9ETQ.cif chain A, native ligand A1H63. Validated by native redock.",
+    "target": "PARP1_CAT_AZD5305_9ETQ",
+    "receptor_pdbqt": "receptor.pdbqt",
+    "box": {
+      "center_x": 8.583766666666667,
+      "center_y": 42.02006666666668,
+      "center_z": 8.141566666666666,
+      "size_x": 33.124,
+      "size_y": 22.5,
+      "size_z": 25.591
+    },
+    "vina": {
+      "exhaustiveness": 8,
+      "num_modes": 9,
+      "cpu": 16,
+      "seed": 42
+    }
+  },
+  "exhaustiveness_schedule": [
+    8
+  ],
+  "base_seed": 42,
+  "compounds_total": 10000,
+  "attempted_this_run": 10000,
+  "succeeded_this_run": 9375,
+  "failed_this_run": 625,
+  "ranked_total": 9378,
+  "wall_seconds_this_run": 19503.1,
+  "best": {
+    "id": "CHEMBL525213",
+    "smiles": "O=C1C=CC[C@H](C[C@@H]2C[C@H]3C[C@](/C=C/c4ccccc4)(Oc4c(C(=O)/C=C/c5ccccc5)c(O)cc(O)c43)O2)O1",
+    "label": "CHEMBL525213",
+    "prep_ok": "True",
+    "dock_ok": "True",
+    "affinity": -13.867,
+    "affinity_mean": "-13.867",
+    "affinity_std": "0.0",
+    "n_passes": "1",
+    "affinities_by_pass": "-13.87",
+    "error": ""
+  }
+}

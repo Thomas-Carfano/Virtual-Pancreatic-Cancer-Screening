@@ -1,0 +1,18 @@
+library: 500000 compounds
+featurizing (ECFP4, 2048 bits) ...
+start: 0 already docked, budget 50000/500000 (10%)
+
+=== iter 0: random_seed | docking 5000 | progress 0/50000 ===
+library: 500000 compounds
+featurizing (ECFP4, 2048 bits) ...
+start: 3 already docked, budget 50000/500000 (10%)
+
+=== iter 0: greedy_top_predicted | docking 10000 | progress 3/50000 ===
+   iter 0 done: +9375 docked (19503s); batch mean actual = -9.788
+
+=== iter 1: greedy_top_predicted | docking 10000 | progress 9378/50000 ===
+library: 500000 compounds
+featurizing (ECFP4, 2048 bits) ...
+start: 14488 already docked, budget 50000/500000 (10%)
+
+=== iter 1: greedy_top_predicted | docking 10000 | progress 14488/50000 ===

@@ -27,6 +27,7 @@ Outputs into --out-dir: actives.csv, decoys.csv, enrichment_compounds.csv, prove
 """
 import csv
 import json
+import random
 import time
 import argparse
 import urllib.request
@@ -56,8 +57,10 @@ def fetch_actives(target_id, pchembl_min=6.0, keyword="", hard_cap=4000):
     """All distinct molecules for the target with pChEMBL >= threshold. Returns {id: {...}}."""
     print(f"[actives] fetching {target_id} activities (pChEMBL >= {pchembl_min}) ...")
     kw = keyword.lower()
+    # order_by=-pchembl_value so the hard_cap keeps the MOST POTENT activities, not an
+    # arbitrary first-N by ChEMBL id (otherwise "top actives" silently isn't the top).
     url = (f"{CHEMBL}/activity.json?target_chembl_id={target_id}"
-           f"&pchembl_value__gte={pchembl_min}&limit=1000&offset=0")
+           f"&pchembl_value__gte={pchembl_min}&order_by=-pchembl_value&limit=1000&offset=0")
     out, fetched = {}, 0
     while url:
         d = chembl_get(url)
@@ -157,11 +160,12 @@ def main():
 
     # ---- Decoys: property-match each active, enforce topological dissimilarity ----
     a_mw = [a[4]["mw"] for a in actives]
-    pool = fetch_decoy_pool(args.decoy_pool, min(a_mw) - 30, max(a_mw) + 30)
+    pool = fetch_decoy_pool(args.decoy_pool, min(a_mw) - 40, max(a_mw) + 40)  # margin > TOL.mw(35) so window isn't clipped
     active_ids = {a[0] for a in actives}
     used, decoys = set(), []
     TOL = dict(mw=35.0, logp=1.5, hbd=1, hba=3, rtb=3)
     pool_items = [(cid, smi) for cid, smi in pool.items() if cid not in active_ids]
+    random.Random(42).shuffle(pool_items)   # de-bias: ChEMBL returns molecules in ID order, not random
     pool_props = {}
 
     def get_pp(cid, smi):
